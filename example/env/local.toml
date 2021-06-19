@@ -1,0 +1,6 @@
+endpoint   = "localhost:5432"
+type       = "postgres"
+database   = "postgres"
+user       = "postgres"
+password   = "postgres"
+is_default = true

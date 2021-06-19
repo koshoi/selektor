@@ -1,0 +1,37 @@
+[env.local]
+include = "env/local.toml"
+
+#========
+
+[selector.logs]
+include = "selector/logs.toml"
+
+#========
+
+[selector.user]
+description = "get user by it's email or id"
+query="""
+    SELECT
+        *
+    FROM users
+    WHERE
+        1 = 1
+        {{ .__defined_email }} AND email = '{{ .email }}'
+        {{ .__defined_id }}    AND id = '{{ .id }}'
+        {{ .__set_limit }}     LIMIT {{ .limit }}
+"""
+
+[selector.user.flag.id]
+description = "specify user's id"
+required = false
+
+[selector.user.flag.email]
+description = "specify user's email"
+required = false
+
+[selector.user.flag.limit]
+description = "set limit for query"
+required = false
+default = "15"
+
+# vim:sw=4:ts=4:expandtab

@@ -1,0 +1,24 @@
+query = """
+    SELECT
+       *
+    FROM logs
+    WHERE
+        1 = 1
+        {{ .__defined_ts }} AND created_at > '{{ .tsFrom }}'
+        {{ .__defined_ts }} AND created_at < '{{ .tsTo }}'
+        {{ .__set_limit }}  LIMIT {{ .limit }}
+"""
+description = "Get logs"
+use_utc = true
+
+[flag.ts]
+required = false
+description = "define timerange for logs"
+type = "timerange"
+
+[flag.limit]
+required = false
+description = "set limit for query"
+default = "100"
+
+# vim:sw=4:ts=4:expandtab
