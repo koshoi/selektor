@@ -229,6 +229,7 @@ func main() {
 		FParseErrWhitelist: cobra.FParseErrWhitelist{
 			UnknownFlags: true,
 		},
+		SilenceUsage: true,
 	}
 	addCommonFlags(rc.Flags())
 
@@ -242,5 +243,7 @@ func main() {
 		rc.AddCommand(cmd)
 	}
 
-	rc.Execute()
+	if err := rc.Execute(); err != nil {
+		os.Exit(1)
+	}
 }
